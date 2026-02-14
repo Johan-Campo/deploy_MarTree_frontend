@@ -1,0 +1,45 @@
+<svg width="420" height="120" viewBox="0 0 420 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="treeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E676"/>
+      <stop offset="50%" stop-color="#00B0FF"/>
+      <stop offset="100%" stop-color="#7C4DFF"/>
+    </linearGradient>
+
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00E676"/>
+      <stop offset="100%" stop-color="#7C4DFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Tree trunk -->
+  <rect x="55" y="50" width="10" height="40" rx="5" fill="url(#treeGradient)" />
+
+  <!-- Tree branches -->
+  <line x1="60" y1="55" x2="30" y2="30" stroke="url(#treeGradient)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="60" y1="55" x2="60" y2="20" stroke="url(#treeGradient)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="60" y1="55" x2="90" y2="30" stroke="url(#treeGradient)" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Nodes (links) -->
+  <circle cx="30" cy="30" r="6" fill="#00E676"/>
+  <circle cx="60" cy="20" r="6" fill="#00B0FF"/>
+  <circle cx="90" cy="30" r="6" fill="#7C4DFF"/>
+
+  <!-- Text -->
+  <text x="130" y="75"
+        font-family="Poppins, Segoe UI, Arial, sans-serif"
+        font-size="48"
+        font-weight="700"
+        fill="url(#textGradient)">
+    MarTree
+  </text>
+
+  <!-- Subtitle -->
+  <text x="132" y="98"
+        font-family="Segoe UI, Arial, sans-serif"
+        font-size="14"
+        fill="#A0A0A0">
+    One link, infinite branches
+  </text>
+</svg>
+

@@ -1,0 +1,128 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* Liquid Glass Input */
+.inputWrapper {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    padding: 1.25rem 2rem;
+    width: 100%;
+    box-shadow:
+        0 15px 40px -10px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.inputWrapper:focus-within {
+    transform: translateY(-2px) scale(1.02);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.12),
+        0 0 0 3px rgba(0, 176, 255, 0.15);
+    border-color: #fff;
+}
+
+.prefix {
+    font-weight: 700;
+    color: #333;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    margin-right: 2px;
+    opacity: 0.8;
+}
+
+.input {
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #000;
+    width: 100%;
+    background: transparent;
+    padding-left: 2px;
+}
+
+.input::placeholder {
+    color: #999;
+}
+
+/* Premium Gradient Button */
+.button {
+    background: #f0f0f0;
+    color: #aaa;
+    border: none;
+    padding: 1.25rem 3.5rem;
+    border-radius: 20px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    cursor: default;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: auto;
+    letter-spacing: 0.02em;
+    position: relative;
+    overflow: hidden;
+}
+
+.buttonActive {
+    /* Brand Gradient: Green -> Blue -> Purple */
+    background: linear-gradient(110deg, #00E676 0%, #00B0FF 40%, #7C4DFF 100%);
+    background-size: 200% auto;
+    color: white;
+    cursor: pointer;
+    box-shadow:
+        0 10px 30px rgba(0, 176, 255, 0.35),
+        0 4px 10px rgba(0, 176, 255, 0.2);
+    animation: gradientShift 4s ease infinite;
+}
+
+.buttonActive:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow:
+        0 15px 40px rgba(124, 77, 255, 0.4),
+        0 5px 15px rgba(0, 176, 255, 0.3);
+    background-position: right center;
+}
+
+.buttonActive:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@media (max-width: 640px) {
+    .inputWrapper {
+        padding: 1rem 1.5rem;
+    }
+
+    .button {
+        width: 100%;
+        padding: 1rem 2rem;
+    }
+}

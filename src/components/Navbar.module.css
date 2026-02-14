@@ -1,0 +1,134 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    width: 92%;
+    max-width: 1400px;
+    margin: 1.5rem auto;
+    border-radius: 28px;
+    position: relative;
+    z-index: 50;
+
+    /* Glassmorphism */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.navbar:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.08);
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 72px;
+    width: auto;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.05));
+    display: block;
+}
+
+.logo:hover {
+    transform: scale(1.08) rotate(-1deg);
+}
+
+.actions {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+}
+
+/* Secondary Button: Iniciar sesión */
+.loginBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1;
+
+    /* Style */
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #444;
+    white-space: nowrap;
+}
+
+.loginBtn:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Primary Button: Registrarse */
+.registerBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.75rem;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1;
+    border: none;
+    white-space: nowrap;
+
+    /* Style */
+    background: linear-gradient(135deg, #00E676 0%, #00B0FF 50%, #7C4DFF 100%);
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 176, 255, 0.3);
+}
+
+.registerBtn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(124, 77, 255, 0.4);
+    background-position: right center;
+}
+
+@media (max-width: 640px) {
+    .navbar {
+        padding: 0.75rem 1.25rem;
+    }
+
+    .logo {
+        height: 48px;
+    }
+
+    .loginBtn {
+        padding: 0.6rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    .registerBtn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.875rem;
+    }
+
+    .actions {
+        gap: 0.75rem;
+    }
+}

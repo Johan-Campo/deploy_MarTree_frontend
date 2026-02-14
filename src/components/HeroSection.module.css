@@ -1,0 +1,101 @@
+.hero {
+    text-align: center;
+    padding: 6rem 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    /* No z-index here to allow background figures to sit behind if needed, 
+       but we use absolute positioning within. */
+}
+
+.contentWrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headline {
+    font-size: 5.5rem;
+    line-height: 1.05;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    letter-spacing: -0.03em;
+    color: #1a1a1a;
+    position: relative;
+}
+
+.accent {
+    background: linear-gradient(90deg, #00E676 0%, #00B0FF 50%, #7C4DFF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.description {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: #555;
+    max-width: 750px;
+    margin: 0 auto 3rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* Background Figures */
+.bgFigure {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.figure1 {
+    top: -50px;
+    left: -150px;
+    width: 400px;
+    height: 400px;
+    color: #00B0FF;
+    opacity: 0.15;
+}
+
+.figure2 {
+    bottom: -100px;
+    right: -200px;
+    width: 500px;
+    height: 500px;
+    color: #7C4DFF;
+    opacity: 0.12;
+}
+
+.figure3 {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    color: #00E676;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .headline {
+        font-size: 3.5rem;
+    }
+
+    .description {
+        font-size: 1.125rem;
+    }
+
+    .figure1,
+    .figure2 {
+        opacity: 0.08;
+    }
+}
