@@ -40,7 +40,7 @@ export default function RegisterView() {
     return (
         <div className="flex flex-col items-center min-h-[80vh] relative">
 
-            {/* Formulario principal con Liquid Glass animado */}
+            
             <form
                 onSubmit={handleSubmit(handleRegister)}
                 className="
@@ -59,19 +59,19 @@ export default function RegisterView() {
                 "
             >
 
-                {/* Fondo líquido animado */}
+                
                 <div className="absolute inset-0 -z-10">
                     <div className="w-full h-full bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 opacity-30 animate-gradient-x rounded-3xl"></div>
                     <div className="absolute w-64 h-64 bg-white/10 rounded-full top-[-20%] left-[-20%] animate-pulse-slow blur-2xl"></div>
                     <div className="absolute w-56 h-56 bg-white/20 rounded-full bottom-[-20%] right-[-10%] animate-pulse-slow blur-3xl"></div>
                 </div>
 
-                {/* Título */}
+                
                 <h2 className="text-3xl font-bold text-white text-center mb-6">
                     Crear Cuenta
                 </h2>
 
-                {/* Nombre */}
+                
                 <div className="space-y-1">
                     <label htmlFor="name" className="text-sm font-semibold text-white">Nombre</label>
                     <input
@@ -83,7 +83,7 @@ export default function RegisterView() {
                             bg-white/30 backdrop-blur-lg
                             px-4 py-3
                             text-black
-                            placeholder-slate-400
+                            placeholder-white
                             outline-none
                             border border-white/20
                             focus:border-cyan-400
@@ -108,7 +108,7 @@ export default function RegisterView() {
                             bg-white/30 backdrop-blur-lg
                             px-4 py-3
                             text-black
-                            placeholder-slate-400
+                            placeholder-white
                             outline-none
                             border border-white/20
                             focus:border-cyan-400
@@ -127,7 +127,7 @@ export default function RegisterView() {
                     {errors.email && <ErrorsMessage>{errors.email.message}</ErrorsMessage>}
                 </div>
 
-                {/* Handle */}
+                
                 <div className="space-y-1">
                     <label htmlFor="handle" className="text-sm font-semibold text-white">Handle</label>
                     <input
@@ -139,7 +139,7 @@ export default function RegisterView() {
                             bg-white/30 backdrop-blur-lg
                             px-4 py-3
                             text-black
-                            placeholder-slate-400
+                            placeholder-white
                             outline-none
                             border border-white/20
                             focus:border-cyan-400
@@ -152,7 +152,7 @@ export default function RegisterView() {
                     {errors.handle && <ErrorsMessage>{errors.handle.message}</ErrorsMessage>}
                 </div>
 
-                {/* Password */}
+                
                 <div className="space-y-1">
                     <label htmlFor="password" className="text-sm font-semibold text-white">Password</label>
                     <input
@@ -164,7 +164,7 @@ export default function RegisterView() {
                             bg-white/30 backdrop-blur-lg
                             px-4 py-3
                             text-black
-                            placeholder-slate-400
+                            placeholder-white
                             outline-none
                             border border-white/20
                             focus:border-cyan-400
@@ -180,7 +180,7 @@ export default function RegisterView() {
                     {errors.password && <ErrorsMessage>{errors.password.message}</ErrorsMessage>}
                 </div>
 
-                {/* Confirm Password */}
+                
                 <div className="space-y-1">
                     <label htmlFor="password_confirmation" className="text-sm font-semibold text-white">Repetir Password</label>
                     <input
@@ -192,7 +192,7 @@ export default function RegisterView() {
                             bg-white/30 backdrop-blur-lg
                             px-4 py-3
                             text-black
-                            placeholder-slate-400
+                            placeholder-white
                             outline-none
                             border border-white/20
                             focus:border-cyan-400
@@ -208,7 +208,7 @@ export default function RegisterView() {
                     {errors.password_confirmation && <ErrorsMessage>{errors.password_confirmation.message}</ErrorsMessage>}
                 </div>
 
-                {/* Botón */}
+                
                 <button
                     type="submit"
                     className="
@@ -227,7 +227,7 @@ export default function RegisterView() {
                     Registrar Usuario
                 </button>
 
-                {/* Link a login */}
+                
                 <div className="mt-4 text-center">
                     <Link className="text-white text-lg font-medium hover:underline" to="/auth/login">
                         ¿Ya tienes una cuenta? Inicia Sesión
@@ -235,7 +235,7 @@ export default function RegisterView() {
                 </div>
             </form>
 
-            {/* Animaciones y keyframes */}
+            
             <style>
                 {`
                 @keyframes slide-fade {
