@@ -11,6 +11,15 @@ MarTree es una aplicación web full-stack que permite a los usuarios crear y ges
 Este repositorio contiene la aplicación frontend desarrollada con React y TypeScript.
 
 ## Vista Previa
+
+<p align="center">
+  <img src="./public/admin_MarTree.png" alt="Panel de administrador" width="500"/>
+</p>
+
+<p align="center">
+  <img src="./public/Perfil_MarTree.png" alt="Perfil de usuario" width="500"/>
+</p>
+
 ---
 
 ## Descripción del Proyecto
