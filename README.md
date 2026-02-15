@@ -13,11 +13,8 @@ Este repositorio contiene la aplicación frontend desarrollada con React y TypeS
 ## Vista Previa
 
 <p align="center">
-  <img src="./public/admin_MarTree.png" alt="Panel de administrador" width="500"/>
-</p>
-
-<p align="center">
-  <img src="./public/Perfil_MarTree.png" alt="Perfil de usuario" width="500"/>
+  <img src="./public/pagina_publica_MarTree.png" alt="Pagina publica" width="54%"/>
+  <img src="./public/admin_MarTree.png" alt="Panel de administrador" width="44%"/>
 </p>
 
 ---
