@@ -1,73 +1,125 @@
-# React + TypeScript + Vite
+# MarTree - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+MarTree es una aplicación web full-stack que permite a los usuarios crear y gestionar una página pública personalizada para centralizar sus enlaces importantes en un solo lugar.
 
-Currently, two official plugins are available:
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=jsonwebtokens)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este repositorio contiene la aplicación frontend desarrollada con React y TypeScript.
 
-## React Compiler
+## Vista Previa
+---
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## Descripción del Proyecto
 
-## Expanding the ESLint configuration
+MarTree fue desarrollado desde cero con el objetivo de construir una aplicación moderna, segura y escalable, aplicando buenas prácticas de desarrollo full-stack.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+La plataforma permite a los usuarios:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Registrarse e iniciar sesión de forma segura
+- Gestionar enlaces personalizados
+- Crear una página pública dinámica
+- Subir imágenes
+- Administrar su perfil
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+El enfoque principal del proyecto fue implementar una arquitectura limpia, seguridad robusta y una experiencia de usuario fluida.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Stack Tecnológico
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Frontend
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- React
+- TypeScript
+- React Router DOM
+- TanStack Query (React Query)
+- Axios
+- Tailwind CSS
+
+### Backend (Repositorio separado)
+
+- Express
+- MongoDB
+- JWT (JSON Web Tokens)
+- Express Validator
+- Cloudinary
+- Configuración de CORS
+- Hashing seguro de contraseñas
+
+### Repositorio del Backend:  
+(https://github.com/Johan-Campo/deploy_MarTree_backend)
+
+---
+
+## Características de Seguridad
+
+- Autenticación basada en JWT
+- Contraseñas hasheadas de forma segura
+- Validación de datos con Express Validator
+- Manejo adecuado de CORS
+- Rutas protegidas
+- Comunicación segura entre cliente y servidor
+
+---
+
+## Funcionalidades Principales
+
+- Registro e inicio de sesión
+- Gestión de sesión mediante token
+- CRUD completo de enlaces
+- Página pública dinámica por usuario
+- Subida de imágenes con Cloudinary
+- Manejo eficiente del estado del servidor con TanStack Query
+- Manejo de errores y validaciones en formularios
+
+---
+
+## Arquitectura
+
+El frontend se comunica con una API REST construida con Express.
+
+El estado del servidor se gestiona utilizando TanStack Query para optimizar:
+- Cache
+- Refetch automático
+- Sincronización de datos
+
+El enrutamiento se implementa con React Router DOM, incluyendo protección de rutas privadas.
+
+La estructura del proyecto está organizada de forma modular para facilitar mantenimiento, escalabilidad y claridad del código.
+
+---
+
+## Instalación
+
+1. Clona el repositorio:
+
+  ```bash
+  git clone https://github.com/Johan-Campo/deploy-MarTree-frontend.git
+  ```
+2. Instala las dependencias:
+
+   ```bash
+   npm install
+   ```
+3. Ejecuta el entorno de desarrollo:
+
+    ```bash
+   npm run dev
+   ```
+## Deploy
+
+El frontend se encuentra desplegado en Netlify.
+
+El backend está desplegado de manera independiente en Render.
+
+## Nota
+
+Este proyecto fue desarrollado con fines de aprendizaje avanzado y portafolio profesional, aplicando estándares modernos de desarrollo full-stack.
+
+   
+
+
