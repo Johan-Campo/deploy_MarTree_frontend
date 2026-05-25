@@ -1,9 +1,11 @@
 import { Outlet, useLocation } from "react-router-dom"
 import { Toaster } from "sonner"
 import Logo from "../components/Logo"
+import { useForceDark } from "../hooks/useForceDark"
 
 export default function AuthLayout() {
 
+    useForceDark()
     const location = useLocation()
     const isNotFound = location.pathname === "/404"
 
