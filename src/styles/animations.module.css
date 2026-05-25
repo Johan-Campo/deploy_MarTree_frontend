@@ -1,105 +1,59 @@
 @keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-60px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-60px); }
+    to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(60px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(60px); }
+    to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
 
-    to {
-        opacity: 1;
-    }
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.88); }
+    to   { opacity: 1; transform: scale(1); }
 }
 
 @keyframes float {
-    0% {
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(-15px);
-    }
-
-    100% {
-        transform: translateY(0px);
-    }
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-14px); }
 }
 
 @keyframes floatSlow {
-    0% {
-        transform: translate(0, 0) rotate(0deg);
-    }
-
-    33% {
-        transform: translate(10px, -15px) rotate(2deg);
-    }
-
-    66% {
-        transform: translate(-5px, 10px) rotate(-1deg);
-    }
-
-    100% {
-        transform: translate(0, 0) rotate(0deg);
-    }
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    33%  { transform: translate(8px, -12px) rotate(2deg); }
+    66%  { transform: translate(-4px, 8px) rotate(-1deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
 }
 
-.slideInLeft {
-    opacity: 0;
-    animation: slideInLeft 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
-.slideInRight {
-    opacity: 0;
-    animation: slideInRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
+.slideInLeft  { opacity: 0; animation: slideInLeft  1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.slideInRight { opacity: 0; animation: slideInRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.fadeIn       { opacity: 0; animation: fadeIn       1.2s ease-out forwards; }
+.fadeUp       { opacity: 0; animation: fadeUp       0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.scaleIn      { opacity: 0; animation: scaleIn      0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 
-.fadeIn {
-    opacity: 0;
-    animation: fadeIn 1.5s ease-out forwards;
-}
+.float     { animation: float     6s  ease-in-out infinite; }
+.floatSlow { animation: floatSlow 12s ease-in-out infinite; }
 
-.float {
-    animation: float 6s ease-in-out infinite;
-}
-
-.floatSlow {
-    animation: floatSlow 12s ease-in-out infinite;
-}
-
-/* Stagger delays */
-.delay100 {
-    animation-delay: 100ms;
-}
-
-.delay300 {
-    animation-delay: 300ms;
-}
-
-.delay500 {
-    animation-delay: 500ms;
-}
-
-.delay700 {
-    animation-delay: 700ms;
-}
+/* Delays */
+.delay100 { animation-delay: 100ms; }
+.delay200 { animation-delay: 200ms; }
+.delay300 { animation-delay: 300ms; }
+.delay400 { animation-delay: 400ms; }
+.delay500 { animation-delay: 500ms; }
+.delay600 { animation-delay: 600ms; }
+.delay700 { animation-delay: 700ms; }
+.delay800 { animation-delay: 800ms; }

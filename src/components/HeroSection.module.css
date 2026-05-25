@@ -1,101 +1,144 @@
 .hero {
     text-align: center;
-    padding: 6rem 1rem 2rem;
+    padding: 4.5rem 1.5rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     width: 100%;
-    max-width: 1000px;
+    max-width: 900px;
     margin: 0 auto;
-    position: relative;
-    /* No z-index here to allow background figures to sit behind if needed, 
-       but we use absolute positioning within. */
+    gap: 1.75rem;
 }
 
-.contentWrapper {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
+/* Badge */
+.badge {
+    display: inline-flex;
     align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1.1rem;
+    border-radius: 999px;
+    background: rgba(124, 77, 255, 0.1);
+    border: 1px solid rgba(124, 77, 255, 0.28);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgba(124, 77, 255, 0.85);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
 }
 
+:global(html.dark) .badge {
+    color: rgba(195, 175, 255, 0.9);
+}
+
+.badgeDot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #a855f7;
+    flex-shrink: 0;
+    animation: pulseDot 2.2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.45; transform: scale(0.75); }
+}
+
+/* Headline */
 .headline {
-    font-size: 5.5rem;
+    font-size: clamp(3rem, 8vw, 5.75rem);
     line-height: 1.05;
     font-weight: 800;
-    margin-bottom: 2rem;
+    margin: 0;
     letter-spacing: -0.03em;
-    color: #1a1a1a;
-    position: relative;
+    color: #1e1b4b;
+}
+
+:global(html.dark) .headline {
+    color: #eef2ff;
 }
 
 .accent {
-    background: linear-gradient(90deg, #00E676 0%, #00B0FF 50%, #7C4DFF 100%);
+    background: linear-gradient(90deg, #00e676 0%, #00b0ff 50%, #7c4dff 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
 
+/* Description */
 .description {
-    font-size: 1.5rem;
-    line-height: 1.5;
-    color: #555;
-    max-width: 750px;
-    margin: 0 auto 3rem;
-    font-weight: 500;
-    opacity: 0.9;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.8;
+    color: rgba(71, 85, 105, 0.8);
+    max-width: 580px;
+    margin: 0;
+    font-weight: 400;
 }
 
-/* Background Figures */
-.bgFigure {
-    position: absolute;
-    z-index: 0;
-    opacity: 0.6;
-    pointer-events: none;
+:global(html.dark) .description {
+    color: rgba(195, 215, 245, 0.58);
 }
 
-.figure1 {
-    top: -50px;
-    left: -150px;
-    width: 400px;
-    height: 400px;
-    color: #00B0FF;
-    opacity: 0.15;
+/* Feature cards row */
+.features {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.25rem;
 }
 
-.figure2 {
-    bottom: -100px;
-    right: -200px;
-    width: 500px;
-    height: 500px;
-    color: #7C4DFF;
-    opacity: 0.12;
+.featureCard {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    cursor: default;
+    user-select: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.figure3 {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 800px;
-    height: 800px;
-    color: #00E676;
-    opacity: 0.05;
-    pointer-events: none;
+:global(html.dark) .featureCard {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.09);
+    box-shadow: none;
 }
 
-@media (max-width: 768px) {
-    .headline {
-        font-size: 3.5rem;
-    }
+.featureCard:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(124, 77, 255, 0.2);
+}
 
-    .description {
-        font-size: 1.125rem;
-    }
+:global(html.dark) .featureCard:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.18);
+}
 
-    .figure1,
-    .figure2 {
-        opacity: 0.08;
-    }
+.featureIcon {
+    width: 15px;
+    height: 15px;
+    color: rgba(124, 77, 255, 0.7);
+    flex-shrink: 0;
+}
+
+:global(html.dark) .featureIcon {
+    color: rgba(175, 200, 255, 0.65);
+}
+
+.featureLabel {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(51, 65, 85, 0.75);
+    white-space: nowrap;
+}
+
+:global(html.dark) .featureLabel {
+    color: rgba(195, 215, 245, 0.6);
 }

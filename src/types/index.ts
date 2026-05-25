@@ -1,3 +1,11 @@
+export type CustomLink = {
+    id: string
+    title: string
+    url: string
+    emoji: string
+    enabled: boolean
+}
+
 export type User = {
     handle: string;
     name: string;
@@ -6,8 +14,10 @@ export type User = {
     description: string;
     image: string;
     links: string;
+    customLinks: string;
+    theme: string;
 }
-export type UserHandle = Pick<User, 'description' | 'handle' | 'image' | 'links' | 'name' >
+export type UserHandle = Pick<User, 'description' | 'handle' | 'image' | 'links' | 'name' | 'customLinks' | 'theme'>
 export type RegisterForm = Pick<User, "handle" | "name" | "email"> & {
     password: string;
     password_confirmation: string;
@@ -27,4 +37,18 @@ export type SocialNetwork = {
 }
 
 export type MarTreeLinks = Pick<SocialNetwork, "name" | "url" | "enabled">;
+
+export type DailyViewEntry = {
+    date: string
+    views: number
+}
+
+export type AnalyticsResponse = {
+    totalViews: number
+    weekViews: number
+    totalClicks: number
+    clickTotals: Record<string, number>
+    customLinkMeta: Record<string, { title: string; emoji: string }>
+    daily: DailyViewEntry[]
+}
 

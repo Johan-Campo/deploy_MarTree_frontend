@@ -1,9 +1,12 @@
-import { BookmarkSquareIcon, UserIcon } from '@heroicons/react/20/solid'
+import { Network, ExternalLink, CircleUser, QrCode, TrendingUp } from 'lucide-react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const tabs = [
-    { name: 'Links', href: '/admin', icon: BookmarkSquareIcon },
-    { name: 'Mi Perfil', href: '/admin/profile', icon: UserIcon },
+    { name: 'Redes',      href: '/admin',              icon: Network },
+    { name: 'Mis Links',  href: '/admin/custom-links', icon: ExternalLink },
+    { name: 'Mi Perfil',  href: '/admin/profile',      icon: CircleUser },
+    { name: 'QR Code',    href: '/admin/qr',           icon: QrCode },
+    { name: 'Analíticas', href: '/admin/analytics',    icon: TrendingUp },
 ]
 
 function classNames(...classes: string[]) {
@@ -17,55 +20,44 @@ export default function NavigationTabs() {
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         navigate(e.target.value)
     }
-    
 
     return (
-        <div className='mb-5'>
+        <div className="mb-8">
+            {/* Mobile select */}
             <div className="sm:hidden">
-                <label htmlFor="tabs" className="sr-only">
-                    Select a tab
-                </label>
+                <label htmlFor="tabs" className="sr-only">Seleccionar sección</label>
                 <select
                     id="tabs"
                     name="tabs"
-                    className="block w-full rounded-md border-white focus:border-black focus:ring-black"
-                    onChange={ handleChange }
+                    className="block w-full rounded-xl border border-slate-200 dark:border-white/20 bg-white dark:bg-white/10 text-slate-800 dark:text-white px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    onChange={handleChange}
+                    defaultValue={location.pathname}
                 >
                     {tabs.map((tab) => (
-                        <option 
-                            value={tab.href}
-                            key={tab.name}
-                        >{tab.name}</option>
+                        <option value={tab.href} key={tab.name} className="bg-gray-900">{tab.name}</option>
                     ))}
                 </select>
             </div>
 
+            {/* Desktop pill tabs */}
             <div className="hidden sm:block">
-                <div className="border-b border-white">
-                    <nav className="-mb-px flex space-x-8" aria-label="Tabs">
-                        {tabs.map((tab) => (
-                            <Link
-                                key={tab.name}
-                                to={tab.href}
-                                className={classNames(
-                                    location.pathname === tab.href
-                                        ? 'border-black text-black'
-                                        : 'border-transparent text-black/50 hover:border-gray-300 hover:text-gray-700 dark:hover:bg-black/30 rounded-t-md dark:hover:text-black/40',
-                                    'group inline-flex items-center border-b-2 py-4 px-1 text-xl'
-                                )}
-                            >
-                                <tab.icon
-                                    className={classNames(
-                                        location.pathname === tab.href ? 'text-black' : 'text-gray-400 group-hover:text-gray-500',
-                                        '-ml-0.5 mr-2 h-5 w-5'
-                                    )}
-                                    aria-hidden="true"
-                                />
-                                <span>{tab.name}</span>
-                            </Link>
-                        ))}
-                    </nav>
-                </div>
+                <nav className="inline-flex gap-1 p-1 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-sm" aria-label="Tabs">
+                    {tabs.map((tab) => (
+                        <Link
+                            key={tab.name}
+                            to={tab.href}
+                            className={classNames(
+                                location.pathname === tab.href
+                                    ? 'bg-gradient-to-r from-purple-600 to-teal-500 text-white shadow-md shadow-purple-600/20'
+                                    : 'text-slate-500 dark:text-white/50 hover:text-slate-800 dark:hover:text-white/80 hover:bg-slate-200 dark:hover:bg-white/5',
+                                'flex items-center gap-2 px-6 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200'
+                            )}
+                        >
+                            <tab.icon className="w-4 h-4" aria-hidden="true" />
+                            {tab.name}
+                        </Link>
+                    ))}
+                </nav>
             </div>
         </div>
     )

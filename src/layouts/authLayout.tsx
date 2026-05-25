@@ -9,20 +9,21 @@ export default function AuthLayout() {
 
     return (
         <>
-            <div className="bg-gray-950 min-h-screen">
-                
-                
-                <div className="pt-10 flex justify-center">
+            <div className="relative min-h-screen overflow-hidden bg-slate-50 dark:bg-[#07071a]">
+                <div className="hidden dark:block absolute top-[-15%] left-[-10%] w-[600px] h-[600px] bg-purple-700/20 rounded-full blur-[130px] pointer-events-none" />
+                <div className="hidden dark:block absolute bottom-[-15%] right-[-10%] w-[600px] h-[600px] bg-teal-500/15 rounded-full blur-[120px] pointer-events-none" />
+                <div className="hidden dark:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-cyan-400/10 rounded-full blur-[100px] pointer-events-none" />
+
+                <div className="relative z-10 pt-10 flex justify-center">
                     <Logo />
                 </div>
 
-               
                 {isNotFound ? (
-                    <div className="mt-10">
+                    <div className="relative z-10 mt-10">
                         <Outlet />
                     </div>
                 ) : (
-                    <div className="max-w-lg mx-auto px-5 py-10">
+                    <div className="relative z-10 max-w-lg mx-auto px-5 py-10">
                         <Outlet />
                     </div>
                 )}

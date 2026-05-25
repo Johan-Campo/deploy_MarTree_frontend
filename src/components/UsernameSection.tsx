@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import slugify from 'react-slugify';
 import { useMutation } from '@tanstack/react-query';
+import { Link as LinkIconLucide, CircleCheck, ArrowRight, CircleAlert } from 'lucide-react';
 import styles from './UsernameSection.module.css';
 import animationStyles from '../styles/animations.module.css';
 import { searchByHandle } from '../api/MarTreeApi';
@@ -12,69 +13,83 @@ interface FormValues {
 }
 
 export const UsernameSection: React.FC = () => {
-
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors }
-    } = useForm<FormValues>({
-        defaultValues: {
-            handle: ''
-        }
+    const { register, handleSubmit, watch, reset } = useForm<FormValues>({
+        defaultValues: { handle: '' }
     });
 
-    const mutation = useMutation({
-        mutationFn: searchByHandle
-    })
+    const mutation = useMutation({ mutationFn: searchByHandle });
 
     const handleValue = watch('handle');
-    const isButtonActive = handleValue.length > 0;
+    const slug = slugify(handleValue || '');
+    const isActive = slug.length > 0;
 
     const onSubmit = (data: FormValues) => {
-        const slug = slugify(data.handle);
-        mutation.mutate(slug);
+        mutation.mutate(slugify(data.handle));
     };
 
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className={`${styles.container} ${animationStyles.slideInRight} ${animationStyles.delay500}`}
+            className={`${styles.container} ${animationStyles.fadeUp} ${animationStyles.delay400}`}
         >
-            <div className={styles.inputWrapper}>
+            {/* Input */}
+            <div className={`${styles.inputWrapper} ${mutation.isError ? styles.inputError : ''} ${mutation.isSuccess ? styles.inputSuccess : ''}`}>
+                <LinkIconLucide className={styles.inputIcon} />
                 <span className={styles.prefix}>martree.com/</span>
                 <input
                     type="text"
                     className={styles.input}
-                    placeholder="tu MarTree"
-                    {...register('handle', { required: true })}
+                    placeholder="tu-martree"
+                    autoComplete="off"
+                    spellCheck={false}
+                    {...register('handle', {
+                        required: true,
+                        onChange: () => {
+                            if (mutation.isSuccess || mutation.isError) mutation.reset();
+                        }
+                    })}
                 />
             </div>
 
-            <div>
-                {errors.handle && <p className={styles.error}>{errors.handle.message}</p>}
-            </div>
+            {/* Success */}
+            {mutation.isSuccess && (
+                <div className={`${styles.successCard} ${animationStyles.scaleIn}`}>
+                    <CircleCheck className={styles.successIcon} />
+                    <span className={styles.successText}>
+                        <strong>@{slug}</strong> está disponible
+                    </span>
+                    <Link
+                        to="/auth/register"
+                        state={{ handle: slug }}
+                        className={styles.successLink}
+                        onClick={() => reset()}
+                    >
+                        Crear cuenta
+                        <ArrowRight className={styles.successArrow} />
+                    </Link>
+                </div>
+            )}
 
-            <div className='mt-10'>
-                {mutation.isPending && <p className={styles.loading}>Buscando...</p>}
-                {mutation.isError && (
-                    <p className={styles.error}>
+            {/* Error */}
+            {mutation.isError && (
+                <div className={`${styles.errorCard} ${animationStyles.scaleIn}`}>
+                    <CircleAlert className={styles.errorIcon} />
+                    <span className={styles.errorText}>
                         {(mutation.error as Error).message}
-                    </p>
-                )}
-                {mutation.isSuccess && mutation.data && (
-                    <p className={styles.success}>
-                        ¡Disponible! <Link to={"/auth/register"} state={{ handle: slugify(handleValue) }} className='text-blue-500 hover:underline'>Crear cuenta</Link>
-                    </p>
-                )}
-            </div>
+                    </span>
+                </div>
+            )}
 
+            {/* CTA button — always visible, no entry animation */}
             <button
                 type="submit"
-                className={`${styles.button} ${isButtonActive ? styles.buttonActive : ''} ${animationStyles.scaleIn} ${animationStyles.delay700}`}
-                disabled={!isButtonActive}
+                className={`${styles.button} ${isActive ? styles.buttonActive : ''}`}
+                disabled={!isActive || mutation.isPending}
             >
-                Obtener mi MarTree
+                {mutation.isPending
+                    ? <span className={styles.spinner} />
+                    : 'Obtener mi MarTree'
+                }
             </button>
         </form>
     );

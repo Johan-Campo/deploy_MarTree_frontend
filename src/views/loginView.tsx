@@ -2,179 +2,127 @@ import { NavLink, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { isAxiosError } from "axios"
-import ErrorsMessage from "../components/errorsMessage"
+import { useMutation } from "@tanstack/react-query"
+import { Mail, Lock } from "lucide-react"
+import ErrorsMessage from "../components/ErrorsMessage"
 import type { LoginForm } from "../types"
 import api from "../config/axios"
 
 export default function LoginView() {
-
     const navigate = useNavigate()
 
-    const initialValues: LoginForm = {
-        email: "",
-        password: ""
-    }
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>({
+        defaultValues: { email: "", password: "" }
+    })
 
-    const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
-
-    const handleLogin = async (data: LoginForm) => {
-           try {
-            const response = await api.post(`/auth/login`, data)
-
-            localStorage.setItem("AUTH_TOKEN", response.data.token)
+    const { mutate: login, isPending } = useMutation({
+        mutationFn: async (data: LoginForm) => {
+            const response = await api.post('/auth/login', data)
+            return response.data
+        },
+        onSuccess: (data) => {
+            localStorage.setItem("AUTH_TOKEN", data.token)
             navigate('/admin')
-        } catch (error) {
-            if(isAxiosError(error) && error.response){
+        },
+        onError: (error) => {
+            if (isAxiosError(error) && error.response) {
                 toast.error(error.response.data.error)
+            } else {
+                toast.error("Error de conexión. Verifica tu internet.")
             }
         }
-    }
+    })
+
+    const inputClass = "w-full h-12 rounded-xl bg-white dark:bg-white/[0.05] border border-slate-200 dark:border-white/[0.09] px-4 text-sm text-slate-800 dark:text-white/90 placeholder-slate-400 dark:placeholder-white/20 outline-none transition-all duration-200 focus:border-purple-500 dark:focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/20 dark:focus:ring-purple-400/15"
+
+    const labelClass = "flex items-center gap-1.5 text-xs font-semibold text-slate-500 dark:text-white/40 uppercase tracking-widest"
 
     return (
-        <div className="relative flex flex-col items-center min-h-[70vh] mt-10">
+        <div className="flex flex-col items-center mt-4">
+            <div className="w-full max-w-md">
+                {/* Card */}
+                <div className="relative bg-white dark:bg-white/[0.04] backdrop-blur-xl border border-slate-200 dark:border-white/[0.09] rounded-3xl px-8 py-10 shadow-lg dark:shadow-2xl">
 
-            {/* Capas decorativas flotantes */}
-            <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 w-80 h-60 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-3xl shadow-2xl -rotate-6 animate-float"></div>
-            <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 w-80 h-60 bg-gradient-to-r from-purple-400 to-pink-400 rounded-3xl shadow-2xl rotate-6 animate-float-delay"></div>
+                    {/* Top gradient line — dark only */}
+                    <div className="hidden dark:block absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-purple-500/40 to-transparent rounded-full" />
 
-            {/* Formulario principal */}
-            <form
-                onSubmit={handleSubmit(handleLogin)}
-                noValidate
-                className="relative w-full max-w-md bg-white rounded-3xl px-12 py-14 border-2 border-slate-200 shadow-2xl z-10 animate-slide-fade"
-            >
-                <h2 className="text-3xl font-bold text-center text-slate-700 mb-8">
-                    Iniciar Sesión
-                </h2>
+                    {/* Header */}
+                    <div className="text-center mb-8">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-purple-100 dark:bg-gradient-to-br dark:from-purple-600/30 dark:to-teal-500/30 border border-purple-200 dark:border-white/10 mb-4">
+                            <Lock className="w-5 h-5 text-purple-600 dark:text-white/60" />
+                        </div>
+                        <h2 className="text-2xl font-bold text-slate-800 dark:text-white/90">Iniciar Sesión</h2>
+                        <p className="text-sm text-slate-500 dark:text-white/35 mt-1">Bienvenido de vuelta</p>
+                    </div>
 
-                {/* Email */}
-                <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-semibold text-slate-600">
-                        E-mail
-                    </label>
-                    <input
-                        id="email"
-                        type="email"
-                        placeholder="correo@ejemplo.com"
-                        className="
-                            w-full h-12 rounded-xl
-                            bg-slate-100
-                            px-4
-                            text-slate-700
-                            placeholder-slate-400
-                            shadow-inner
-                            focus:outline-none
-                            focus:ring-2
-                            focus:ring-cyan-400
-                            transition
-                            duration-300
-                            ease-in-out
-                            focus:scale-105
-                        "
-                        {...register("email", {
-                            required: "El Email es obligatorio",
-                            pattern: {
-                                value: /\S+@\S+\.\S+/,
-                                message: "E-mail no válido",
-                            },
-                        })}
-                    />
-                    {errors.email && <ErrorsMessage>{errors.email.message}</ErrorsMessage>}
+                    <form onSubmit={handleSubmit((data) => login(data))} noValidate className="space-y-5">
+
+                        {/* Email */}
+                        <div className="space-y-1.5">
+                            <label htmlFor="email" className={labelClass}>
+                                <Mail className="w-3.5 h-3.5" />
+                                E-mail
+                            </label>
+                            <input
+                                id="email"
+                                type="email"
+                                placeholder="correo@ejemplo.com"
+                                className={inputClass}
+                                {...register("email", {
+                                    required: "El email es obligatorio",
+                                    pattern: { value: /\S+@\S+\.\S+/, message: "Email no válido" },
+                                })}
+                            />
+                            {errors.email && <ErrorsMessage>{errors.email.message}</ErrorsMessage>}
+                        </div>
+
+                        {/* Password */}
+                        <div className="space-y-1.5">
+                            <label htmlFor="password" className={labelClass}>
+                                <Lock className="w-3.5 h-3.5" />
+                                Contraseña
+                            </label>
+                            <input
+                                id="password"
+                                type="password"
+                                placeholder="••••••••"
+                                className={inputClass}
+                                {...register("password", { required: "La contraseña es obligatoria" })}
+                            />
+                            {errors.password && <ErrorsMessage>{errors.password.message}</ErrorsMessage>}
+                        </div>
+
+                        {/* Submit */}
+                        <button
+                            type="submit"
+                            disabled={isPending}
+                            className="
+                                w-full py-3.5 rounded-xl text-sm font-bold uppercase tracking-wider mt-2
+                                bg-gradient-to-r from-purple-600 to-teal-500 text-white
+                                shadow-lg shadow-purple-600/20
+                                hover:shadow-purple-600/35 hover:scale-[1.01]
+                                active:scale-[0.99] transition-all duration-200
+                                disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:shadow-none
+                            "
+                        >
+                            {isPending ? (
+                                <span className="flex items-center justify-center gap-2">
+                                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin inline-block" />
+                                    Iniciando sesión...
+                                </span>
+                            ) : "Iniciar Sesión"}
+                        </button>
+
+                        {/* Register link */}
+                        <p className="text-center text-sm text-slate-500 dark:text-white/35 pt-1">
+                            ¿No tienes cuenta?{" "}
+                            <NavLink to="/auth/register" className="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-semibold transition-colors hover:underline">
+                                Regístrate
+                            </NavLink>
+                        </p>
+                    </form>
                 </div>
-
-                {/* Password */}
-                <div className="mt-6 space-y-2">
-                    <label htmlFor="password" className="text-sm font-semibold text-slate-600">
-                        Contraseña
-                    </label>
-                    <input
-                        id="password"
-                        type="password"
-                        placeholder="••••••••"
-                        className="
-                            w-full h-12 rounded-xl
-                            bg-slate-100
-                            px-4
-                            text-slate-700
-                            placeholder-slate-400
-                            shadow-inner
-                            focus:outline-none
-                            focus:ring-2
-                            focus:ring-cyan-400
-                            transition
-                            duration-300
-                            ease-in-out
-                            focus:scale-105
-                        "
-                        {...register("password", {
-                            required: "El Password es obligatorio",
-                        })}
-                    />
-                    {errors.password && <ErrorsMessage>{errors.password.message}</ErrorsMessage>}
-                </div>
-
-                {/* Botón */}
-                <button
-                    type="submit"
-                    className="
-                        mt-8 w-full py-3
-                        rounded-xl
-                        bg-gradient-to-r from-cyan-400 to-blue-500
-                        text-white
-                        font-bold
-                        shadow-xl
-                        transition
-                        duration-300
-                        transform
-                        hover:scale-105
-                        hover:shadow-2xl
-                        hover:-translate-y-1
-                        focus:outline-none
-                    "
-                >
-                    Iniciar Sesión
-                </button>
-
-                {/* Registro */}
-                <div className="mt-6 text-center">
-                    <span className="text-gray-600">¿No tienes una cuenta? </span>
-                    <NavLink to="/auth/register" className="text-blue-500 font-semibold hover:underline">
-                        Regístrate
-                    </NavLink>
-                </div>
-            </form>
-
-         
-            <style>
-                {`
-                @keyframes float {
-                    0%, 100% { transform: translateX(-50%) translateY(0) rotate(-6deg); }
-                    50% { transform: translateX(-50%) translateY(-10px) rotate(-6deg); }
-                }
-
-                @keyframes float-delay {
-                    0%, 100% { transform: translateX(-50%) translateY(0) rotate(6deg); }
-                    50% { transform: translateX(-50%) translateY(-12px) rotate(6deg); }
-                }
-
-                @keyframes slide-fade {
-                    0% { opacity: 0; transform: translateY(20px); }
-                    100% { opacity: 1; transform: translateY(0); }
-                }
-
-                .animate-float {
-                    animation: float 4s ease-in-out infinite;
-                }
-
-                .animate-float-delay {
-                    animation: float-delay 5s ease-in-out infinite;
-                }
-
-                .animate-slide-fade {
-                    animation: slide-fade 0.8s ease-out forwards;
-                }
-                `}
-            </style>
+            </div>
         </div>
     )
 }

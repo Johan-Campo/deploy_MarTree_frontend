@@ -1,13 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import LoginView from "./views/loginView"
-import RegisterView from "./views/registerView"
+import LoginView from "./views/LoginView"
+import RegisterView from "./views/RegisterView"
 import AuthLayout from "./layouts/authLayout"
+import PublicLayout from "./layouts/PublicLayout"
 import AppLayout from "./layouts/appLayout"
 import MarTreeView from "./views/MarTreeView"
-import ProfileView from "./views/profileView"
+import ProfileView from "./views/ProfileView"
 import HandleView from "./views/HandleView"
 import NotFoundView from "./views/NotFoundView"
 import HomeView from "./views/HomeView"
+import AnalyticsView from "./views/AnalyticsView"
+import CustomLinksView from "./views/CustomLinksView"
+import QRView from "./views/QRView"
 
 export default function Router() {
 
@@ -22,10 +26,13 @@ export default function Router() {
 
                 <Route path="/admin" element={< AppLayout />}>
                     <Route index={true} element={< MarTreeView />} />
+                    <Route path="custom-links" element={< CustomLinksView />} />
                     <Route path="profile" element={< ProfileView />} />
+                    <Route path="qr" element={< QRView />} />
+                    <Route path="analytics" element={< AnalyticsView />} />
                 </Route>
 
-                <Route path="/:handle" element={< AuthLayout />}>
+                <Route path="/:handle" element={<PublicLayout />}>
                     <Route element={<HandleView />} index={true} />
                 </Route>
 
